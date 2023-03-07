@@ -5,11 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>ru.skillbox.diplom-alpha</groupId>
+        <groupId>ru.skillbox.diplom.group35</groupId>
         <artifactId>microservice-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
+    <groupId>ru.skillbox.diplom.group35</groupId>
     <artifactId>library-core</artifactId>
     <version>${revision}${sha1}${changelist}</version>
 
