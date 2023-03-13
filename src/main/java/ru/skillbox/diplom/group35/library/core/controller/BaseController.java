@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.*;
 import ru.skillbox.diplom.group35.library.core.dto.base.BaseDto;
 import ru.skillbox.diplom.group35.library.core.dto.base.BaseSearchDto;
 
+import java.util.UUID;
+
 public interface BaseController<Dto extends BaseDto, SearchDto extends BaseSearchDto> {
 
-    @GetMapping(value = "/{id}")
-    ResponseEntity<Dto> getById(@PathVariable Long id);
+    @GetMapping(value = "/{uuid}")
+    ResponseEntity<Dto> getById(@PathVariable UUID uuid);
 
     @GetMapping
     ResponseEntity<Page<Dto>> getAll(SearchDto searchDto, Pageable page);
@@ -21,6 +23,6 @@ public interface BaseController<Dto extends BaseDto, SearchDto extends BaseSearc
     @PutMapping
     ResponseEntity<Dto> update(@RequestBody Dto dto);
 
-    @DeleteMapping(value = "/{id}")
-    void deleteById(@PathVariable Long id);
+    @DeleteMapping(value = "/{uuid}")
+    void deleteById(@PathVariable UUID uuid);
 }
