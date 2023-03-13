@@ -1,11 +1,18 @@
 package ru.skillbox.diplom.group35.library.core.dto.base;
 
-import lombok.Data;
+import lombok.*;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-@Data
-public class BaseDto {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public abstract class BaseDto implements Serializable {
+
     private UUID id;
-    private boolean isDeleted;
+
+    private Boolean isDeleted;
 }
+
