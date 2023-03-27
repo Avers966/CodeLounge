@@ -11,8 +11,8 @@ import java.util.UUID;
 
 public interface BaseController<Dto extends BaseDto, SearchDto extends BaseSearchDto> {
 
-    @GetMapping(value = "/{uuid}")
-    ResponseEntity<Dto> getById(@PathVariable UUID uuid);
+    @GetMapping(value = "/{id}")
+    ResponseEntity<Dto> getById(@PathVariable UUID id);
 
     @GetMapping
     ResponseEntity<Page<Dto>> getAll(SearchDto searchDto, Pageable page);
@@ -23,6 +23,6 @@ public interface BaseController<Dto extends BaseDto, SearchDto extends BaseSearc
     @PutMapping
     ResponseEntity<Dto> update(@RequestBody Dto dto);
 
-    @DeleteMapping(value = "/{uuid}")
-    void deleteById(@PathVariable UUID uuid);
+    @DeleteMapping(value = "/{id}")
+    void deleteById(@PathVariable UUID id);
 }
