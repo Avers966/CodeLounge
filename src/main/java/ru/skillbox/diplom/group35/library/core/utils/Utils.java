@@ -1,4 +1,4 @@
-package ru.skillbox.diplom.group35.library.core.util;
+package ru.skillbox.diplom.group35.library.core.utils;
 
 /**
  * utils
