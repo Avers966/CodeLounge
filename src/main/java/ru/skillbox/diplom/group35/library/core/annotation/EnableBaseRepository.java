@@ -17,7 +17,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static ru.skillbox.diplom.group35.library.core.util.Utils.BASE_PACKAGE;
+import static ru.skillbox.diplom.group35.library.core.utils.Utils.BASE_PACKAGE;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
