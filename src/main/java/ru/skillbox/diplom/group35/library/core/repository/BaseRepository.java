@@ -19,6 +19,5 @@ public interface BaseRepository<Entity extends BaseEntity> extends JpaRepository
     void hardDelete(Entity entity);
     void hardDeleteById(UUID id);
     @NonNull
-    @Override
-    Optional<Entity> findById(@NonNull UUID id);
+    Entity getById(@NonNull UUID id);
 }
