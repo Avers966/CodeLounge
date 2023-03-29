@@ -60,11 +60,7 @@ public class BaseRepositoryImpl<Entity extends BaseEntity>
 
     @Transactional
     @NonNull
-    @Override
-    public Optional<Entity> findById(@NonNull UUID uuid) {
-        if (super.findById(uuid).isEmpty()){
-            throw new EntityNotFoundException();
-        }
-        return super.findById(uuid);
+    public Entity getById(@NonNull UUID uuid) {
+        return super.findById(uuid).orElseThrow(EntityNotFoundException::new);
     }
 }
