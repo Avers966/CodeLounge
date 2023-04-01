@@ -23,7 +23,7 @@ public class JwtTokenProvider {
 
     public String createToken(UUID userId, String email) {
         JwtClaimsSet jwtClaimsSet = JwtClaimsSet.builder()
-                .claim("id", userId)
+                .claim("id", userId.toString())
                 .claim("email", email)
                 .expiresAt(ZonedDateTime.now().plusHours(3).toInstant())
                 .build();
