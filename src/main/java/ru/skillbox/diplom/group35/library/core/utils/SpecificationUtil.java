@@ -48,7 +48,7 @@ public class SpecificationUtil {
     public <T, V> Specification<T> in(SingularAttribute<T, V> field, List<V> value, boolean isSkipNullValues) {
         return nullValueCheck(value, isSkipNullValues, () -> ((root, query, builder) -> {
                 query.distinct(true);
-                return builder.in(root.get(field));
+                return root.get(field).in(value);
         }));
     }
 
