@@ -8,6 +8,6 @@ import java.util.UUID;
 @Getter
 @Setter
 public class AccountDetails {
-    private String id;
+    private UUID id;
     private String email;
 }
