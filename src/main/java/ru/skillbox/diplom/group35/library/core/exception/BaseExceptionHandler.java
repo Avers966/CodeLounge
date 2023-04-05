@@ -21,4 +21,9 @@ public class BaseExceptionHandler {
     protected ResponseEntity handleException() {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
+
+    @ExceptionHandler({UnauthorizedException.class})
+    protected ResponseEntity unauthorizedHandler(UnauthorizedException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
 }
