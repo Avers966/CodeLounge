@@ -12,8 +12,10 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
 
 
@@ -24,24 +26,30 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(authorize -> {
 
-                            try {
-                                authorize
-                                        .antMatchers("**/**")
-                                        .permitAll()
-                                        .and()
-                                        .csrf().disable();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/").permitAll()
+                .and()
+                .logout(
+                        logout -> {
+                            logout
+                                    .logoutUrl("/api/v1/auth/logout")
+                                    .logoutSuccessUrl("/")
+                                    .logoutSuccessHandler(getLogoutSuccessHandler())
+                                    .invalidateHttpSession(true);
                         }
                 )
                 .oauth2ResourceServer().jwt().decoder(jwtDecoder())
                 .jwtAuthenticationConverter(jwtAuthenticationConverter());
         return http.build();
+    }
+
+    @Bean
+    protected LogoutSuccessHandler getLogoutSuccessHandler() {
+        return (httpServletRequest, httpServletResponse, authentication) -> {
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+        };
     }
 
     @Bean
