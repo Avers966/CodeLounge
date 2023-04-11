@@ -151,7 +151,10 @@
             <groupId>com.github.cage</groupId>
             <artifactId>cage</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.cloudinary</groupId>
+            <artifactId>cloudinary-http44</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
