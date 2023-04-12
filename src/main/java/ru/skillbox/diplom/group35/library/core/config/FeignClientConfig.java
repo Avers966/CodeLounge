@@ -19,7 +19,7 @@ public class FeignClientConfig {
     @Bean
     public RequestInterceptor requestInterceptor() {
         return requestTemplate -> {
-            requestTemplate.header("Authorization", "Bearer " + securityUtil.getJwtToken());
+            requestTemplate.header("Authorization", "Bearer " + securityUtil.getJwtTokenValue());
         };
     }
 

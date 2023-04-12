@@ -2,6 +2,7 @@ package ru.skillbox.diplom.group35.library.core.utils;
 
 
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Component;
 
@@ -12,15 +13,18 @@ import java.util.UUID;
 public class SecurityUtil {
 
     public AccountDetails getAccountDetails() {
-        JwtAuthenticationToken token = getJwtToken();
+        Jwt token = getJwtToken();
         AccountDetails accountDetails = new AccountDetails();
-        accountDetails.setId(UUID.fromString(token.getToken().getClaim("id").toString()));
-        accountDetails.setEmail(token.getToken().getClaim("email"));
+        accountDetails.setId(UUID.fromString(token.getClaim("id").toString()));
+        accountDetails.setEmail(token.getClaim("email"));
         return accountDetails;
     }
 
-    public JwtAuthenticationToken getJwtToken() {
-        return  (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+    private Jwt getJwtToken() {
+        return  ((JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication()).getToken();
     }
 
+    public String getJwtTokenValue() {
+        return  getJwtToken().getTokenValue();
+    }
 }
