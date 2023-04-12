@@ -11,11 +11,16 @@ import java.util.UUID;
 @Component
 public class SecurityUtil {
 
-    public AccountDetails getAccountDetails(){
-        JwtAuthenticationToken token = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+    public AccountDetails getAccountDetails() {
+        JwtAuthenticationToken token = getJwtToken();
         AccountDetails accountDetails = new AccountDetails();
         accountDetails.setId(UUID.fromString(token.getToken().getClaim("id").toString()));
         accountDetails.setEmail(token.getToken().getClaim("email"));
         return accountDetails;
     }
+
+    public JwtAuthenticationToken getJwtToken() {
+        return  (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+    }
+
 }
