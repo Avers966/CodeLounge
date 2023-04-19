@@ -3,6 +3,7 @@ package ru.skillbox.diplom.group35.library.core.annotation;
 
 import org.springframework.context.annotation.Import;
 import ru.skillbox.diplom.group35.library.core.security.config.SecurityConfig;
+import ru.skillbox.diplom.group35.library.core.security.config.TechnicalUserConfig;
 import ru.skillbox.diplom.group35.library.core.utils.SecurityUtil;
 
 import java.lang.annotation.ElementType;
@@ -12,7 +13,7 @@ import java.lang.annotation.Target;
 
 
 
-@Import({SecurityConfig.class, SecurityUtil.class})
+@Import({SecurityConfig.class, SecurityUtil.class, TechnicalUserConfig.class})
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface EnableSecurity {
