@@ -29,8 +29,8 @@ public class SecurityConfig {
 
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/register", "/login").hasRole("ROLE_SYSTEM")
-                .antMatchers()
+                .antMatchers("/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/captcha").permitAll()
+                .anyRequest()
                 .authenticated()
                 .and()
                 .logout(
