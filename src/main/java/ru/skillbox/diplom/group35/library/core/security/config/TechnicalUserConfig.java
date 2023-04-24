@@ -1,14 +1,14 @@
 package ru.skillbox.diplom.group35.library.core.security.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+import org.springframework.stereotype.Component;
 import ru.skillbox.diplom.group35.library.core.security.jwt.JwtTokenProvider;
 
 import java.util.List;
 import java.util.function.Supplier;
-
+@Component
 public class TechnicalUserConfig {
 
     private final JwtTokenProvider jwtTokenProvider;
