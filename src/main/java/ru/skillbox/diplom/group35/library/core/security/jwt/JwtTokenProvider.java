@@ -37,10 +37,10 @@ public class JwtTokenProvider {
                 .getTokenValue();
 
     }
-    @Bean
+
     public String systemToken(String systemKey){
         JwtClaimsSet jwtClaimsSet = JwtClaimsSet.builder()
-                .claim("role", systemKey)
+                .claim("ROLE_", systemKey)
                 .expiresAt(ZonedDateTime.now().plusHours(3).toInstant())
                 .build();
         JwsAlgorithm jwsAlgorithm = JWSAlgorithm.HS256::getName;
