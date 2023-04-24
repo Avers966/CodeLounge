@@ -11,8 +11,6 @@ import java.util.function.Supplier;
 
 public class TechnicalUserConfig {
 
-    @Value("${SystemKey}")
-    private String systemKey;
     private final JwtTokenProvider jwtTokenProvider;
 
     private final SecurityConfig securityConfig;
@@ -49,6 +47,7 @@ public class TechnicalUserConfig {
 
     private SecurityContext createContextFromToken() {
         var context = SecurityContextHolder.createEmptyContext();
+        String systemKey = "SYSTEM";
         context.setAuthentication(
                 new JwtAuthenticationToken(securityConfig
                         .jwtDecoder()
