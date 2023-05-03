@@ -21,12 +21,21 @@ public class SpecificationUtil {
         }));
     }
 
-    public <T> Specification<T> likeLowerCase(SingularAttribute<T, String> field, String value,
+    public <T> Specification<T> doubleLikeLowerCase(SingularAttribute<T, String> field, String value,
                                               boolean isSkipNullValues) {
         return nullValueCheck(value, isSkipNullValues, () -> ((root, query, builder) -> {
             query.distinct(true);
             return builder.like(
                     builder.lower(root.get(field)), "%" + value.toLowerCase() + "%");
+        }));
+    }
+
+    public <T> Specification<T> likeLowerCase(SingularAttribute<T, String> field, String value,
+                                              boolean isSkipNullValues) {
+        return nullValueCheck(value, isSkipNullValues, () -> ((root, query, builder) -> {
+            query.distinct(true);
+            return builder.like(
+                    builder.lower(root.get(field)), value.toLowerCase() + "%");
         }));
     }
 
