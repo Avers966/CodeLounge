@@ -1,6 +1,7 @@
 package ru.skillbox.diplom.group35.library.core.utils;
 
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
@@ -21,10 +22,16 @@ public class SecurityUtil {
     }
 
     private Jwt getJwtToken() {
-        return  ((JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication()).getToken();
+        Authentication currentAuthentication = getAuthentication();
+        return currentAuthentication instanceof JwtAuthenticationToken ?
+                ((JwtAuthenticationToken) currentAuthentication).getToken(): null;
     }
 
     public String getJwtTokenValue() {
-        return  getJwtToken().getTokenValue();
+        return getJwtToken() != null ? getJwtToken().getTokenValue() : null;
+    }
+
+    public static Authentication getAuthentication(){
+        return SecurityContextHolder.getContext().getAuthentication();
     }
 }
