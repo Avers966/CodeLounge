@@ -1,6 +1,7 @@
 package ru.skillbox.diplom.group35.library.core.exception;
 
 import feign.FeignException;
+import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -38,5 +39,11 @@ public class BaseExceptionHandler {
     public ResponseEntity handleMaxUploadException(){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("request size is too big");
     }
+
+    @ExceptionHandler(PropertyReferenceException.class)
+    public ResponseEntity propertyReferenceException(){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
 
 }
