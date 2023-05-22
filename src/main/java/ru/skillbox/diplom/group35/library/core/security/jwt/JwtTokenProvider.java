@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.time.ZonedDateTime;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 @Component
 public class JwtTokenProvider {
@@ -25,10 +27,11 @@ public class JwtTokenProvider {
         return new NimbusJwtEncoder(immutableSecret);
     }
 
-    public String createToken(UUID userId, String email) {
+    public String createToken(UUID userId, String email, Collection<String> roles) {
         JwtClaimsSet jwtClaimsSet = JwtClaimsSet.builder()
                 .claim("id", userId.toString())
                 .claim("email", email)
+                .claim("roles", roles)
                 .expiresAt(ZonedDateTime.now().plusHours(3).toInstant())
                 .build();
         JwsAlgorithm jwsAlgorithm = JWSAlgorithm.HS256::getName;
