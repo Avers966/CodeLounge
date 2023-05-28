@@ -33,9 +33,8 @@ public class SecurityConfig {
 
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/captcha").permitAll()
-                .antMatchers("/v3/api-docs/**", "/api/v1/**/api-docs/**",
-                        "/swagger-ui/**", "/api/v1/**/swagger-ui/**").permitAll()
+                .antMatchers("/api/v1/auth/register", "/api/v1/auth/login",
+                    "/api/v1/auth/captcha", "/v3/api-docs/**", "/api/v1/**/api-docs/**", "/swagger-ui/**", "/api/v1/**/swagger-ui/**").permitAll()
                 .antMatchers("/api/v1/admin-console/**").hasAuthority("SCOPE_ADMIN")
                 .anyRequest()
                 .authenticated()
@@ -90,7 +89,7 @@ public class SecurityConfig {
             Cookie[] cookies = request.getCookies();
             for (Cookie cookie : cookies) {
                 String cookieString = cookie.getName();
-                if (cookieString.contains("jwt")) {
+                if (cookieString.contains("jwt") && !cookie.getValue().isBlank() ) {
                     return cookie.getValue();
                 }
             }
