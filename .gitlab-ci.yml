@@ -1,0 +1,13 @@
+image: maven:3.8.3-jdk-11
+
+stages:
+  - build
+
+build:
+  stage: build
+  only: 
+    - develop
+  script:
+    - mvn -s maven-settings.xml clean deploy
+  variables:
+    MAVEN_OPTS: "-Dmaven.repo.local=./.m2/repository"
