@@ -4,8 +4,6 @@ import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.oauth2.jose.jws.JwsAlgorithm;
 import org.springframework.security.oauth2.jwt.*;
 import org.springframework.stereotype.Component;
@@ -14,7 +12,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.time.ZonedDateTime;
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 @Component
 public class JwtTokenProvider {
@@ -45,7 +42,7 @@ public class JwtTokenProvider {
     public String systemToken(String systemKey){
         JwtClaimsSet jwtClaimsSet = JwtClaimsSet.builder()
                 .claim("ROLE_", systemKey)
-                .expiresAt(ZonedDateTime.now().plusHours(3).toInstant())
+                .expiresAt(ZonedDateTime.now().plusYears(1).toInstant())
                 .build();
         JwsAlgorithm jwsAlgorithm = JWSAlgorithm.HS256::getName;
 

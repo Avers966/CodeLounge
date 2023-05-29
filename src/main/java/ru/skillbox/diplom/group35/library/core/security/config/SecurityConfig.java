@@ -24,7 +24,7 @@ import java.nio.charset.StandardCharsets;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true )
 public class SecurityConfig {
 
     @Bean
@@ -33,9 +33,8 @@ public class SecurityConfig {
 
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v1/auth/register", "/api/v1/auth/login",
-                    "/api/v1/auth/captcha", "/v3/api-docs/**", "/api/v1/**/api-docs/**", "/swagger-ui/**", "/api/v1/**/swagger-ui/**").permitAll()
-                .antMatchers("/api/v1/admin-console/**").hasAuthority("SCOPE_ADMIN")
+                .antMatchers("/api/v1/auth/**", "/v3/api-docs/**",
+                        "/api/v1/**/api-docs/**", "/swagger-ui/**", "/api/v1/**/swagger-ui/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -89,7 +88,9 @@ public class SecurityConfig {
             Cookie[] cookies = request.getCookies();
             for (Cookie cookie : cookies) {
                 String cookieString = cookie.getName();
-                if (cookieString.contains("jwt") && !cookie.getValue().isBlank() ) {
+                String cookieUrl = request.getRequestURI();
+                if (cookieString.contains("jwtPath") && !cookie.getValue().isBlank()
+                        && cookieUrl.contains("/api/v1/streaming/ws") ) {
                     return cookie.getValue();
                 }
             }
