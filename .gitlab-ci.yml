@@ -6,7 +6,7 @@ stages:
 build:
   stage: build
   only: 
-    - develop
+    - fix-admin-scope
   script:
     - mvn -s maven-settings.xml clean deploy
   variables:
