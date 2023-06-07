@@ -3,6 +3,7 @@ package ru.skillbox.diplom.group35.library.core.utils;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -10,4 +11,5 @@ import java.util.UUID;
 public class AccountDetails {
     private UUID id;
     private String email;
+    private List<String> roles;
 }

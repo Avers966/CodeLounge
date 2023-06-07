@@ -18,6 +18,7 @@ public class SecurityUtil {
         AccountDetails accountDetails = new AccountDetails();
         accountDetails.setId(UUID.fromString(token.getClaim("id").toString()));
         accountDetails.setEmail(token.getClaim("email"));
+        accountDetails.setRoles(token.getClaim("roles"));
         return accountDetails;
     }
 

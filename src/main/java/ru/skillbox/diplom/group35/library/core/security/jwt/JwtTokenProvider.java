@@ -29,7 +29,7 @@ public class JwtTokenProvider {
                 .claim("id", userId.toString())
                 .claim("email", email)
                 .claim("roles", roles)
-                .expiresAt(ZonedDateTime.now().plusHours(3).toInstant())
+                .expiresAt(ZonedDateTime.now().plusMinutes(15).toInstant())
                 .build();
         JwsAlgorithm jwsAlgorithm = JWSAlgorithm.HS256::getName;
 
@@ -37,6 +37,20 @@ public class JwtTokenProvider {
                 .encode(JwtEncoderParameters.from(JwsHeader.with(jwsAlgorithm).build(), jwtClaimsSet))
                 .getTokenValue();
 
+    }
+
+    public String refreshToken(UUID userId, String email){
+        JwtClaimsSet jwtClaimsSet = JwtClaimsSet.builder()
+                .claim("id", userId.toString())
+                .claim("email", email)
+                .expiresAt(ZonedDateTime.now().plusHours(3).toInstant())
+                .build();
+        
+        JwsAlgorithm jwsAlgorithm = JWSAlgorithm.HS256::getName;
+
+        return jwtEncoder()
+                .encode(JwtEncoderParameters.from(JwsHeader.with(jwsAlgorithm).build(), jwtClaimsSet))
+                .getTokenValue();
     }
 
     public String systemToken(String systemKey){
